@@ -213,4 +213,4 @@ See `docs/project_report.pdf` for full deployment steps and screenshots.
 
 ---
 
-*CS-402 | Spring 2025 | HITEC University Taxila*
+*CS-402 | Spring 2026 | HITEC University Taxila*
