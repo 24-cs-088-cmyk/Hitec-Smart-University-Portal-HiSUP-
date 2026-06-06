@@ -1,7 +1,7 @@
 -- ============================================================
 -- HiSUP_DB_Script.sql (FIXED)
 -- HITEC Smart University Portal
--- CS-402 Advanced Database Management Systems
+-- CS-318 Advanced Database Management Systems
 -- ============================================================
 
 USE master;
@@ -583,10 +583,4 @@ INSERT INTO Results (StudentID, ExamID, MarksObtained, Grade) VALUES
 (1, 1, 42.00, 'A'),
 (2, 1, 35.00, 'B'),
 (3, 1, 28.00, 'C');
-GO
-
-PRINT '============================================================';
-PRINT 'HiSUP_DB created successfully!';
-PRINT '20 tables | 7 indexes | Full-text search | Seed data loaded';
-PRINT '============================================================';
 GO
