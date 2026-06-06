@@ -16,9 +16,9 @@
 
 | Name | Roll No | Contribution |
 |------|---------|--------------|
-| ...  | ...     | ...          |
-| ...  | ...     | ...          |
-| ...  | ...     | ...          |
+| Arfa Mughal| 24-CS-088| MySQL, Backend development and Deployment|
+| Muskan Zahra| 24-CS-173| CloudDB and Soucrce Control |
+| Javeria Khurshid | 24-CS-058 | Frontend, Auth and Hosting |
 
 ---
 
@@ -213,4 +213,4 @@ See `docs/project_report.pdf` for full deployment steps and screenshots.
 
 ---
 
-*CS-402 | Spring 2026 | HITEC University Taxila*
+*CS-318 | Spring 2026 | HITEC University Taxila*
