@@ -1,0 +1,18 @@
+@{ ViewData["Title"] = "Faculty Dashboard"; }
+<h4 class="fw-bold mb-4"><i class="bi bi-speedometer2 text-primary"></i> Faculty Dashboard</h4>
+<div class="row g-3">
+    <div class="col-md-4">
+        <a asp-action="Attendance" class="card p-4 text-decoration-none text-dark d-block">
+            <i class="bi bi-calendar-check fs-1 text-primary"></i>
+            <div class="fw-bold mt-2">Mark Attendance</div>
+            <small class="text-muted">Record student attendance</small>
+        </a>
+    </div>
+    <div class="col-md-4">
+        <a asp-action="Grades" class="card p-4 text-decoration-none text-dark d-block">
+            <i class="bi bi-award fs-1 text-success"></i>
+            <div class="fw-bold mt-2">Enter Grades</div>
+            <small class="text-muted">Upload and manage grades</small>
+        </a>
+    </div>
+</div>

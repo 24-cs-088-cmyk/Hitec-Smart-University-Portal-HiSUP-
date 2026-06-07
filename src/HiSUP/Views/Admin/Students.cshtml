@@ -1,0 +1,38 @@
+@model List<HiSUP.Models.Student>
+@{ ViewData["Title"] = "Students"; }
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h4 class="fw-bold mb-0"><i class="bi bi-people text-primary"></i> All Students</h4>
+</div>
+<div class="card p-3">
+    <div class="table-responsive">
+        <table class="table table-hover align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>ID</th><th>Name</th><th>Email</th>
+                    <th>Department</th><th>Program</th>
+                    <th>Semester</th><th>CGPA</th><th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var s in Model)
+                {
+                    <tr>
+                        <td>@s.StudentID</td>
+                        <td class="fw-semibold">@s.FirstName @s.LastName</td>
+                        <td>@s.Email</td>
+                        <td>@s.Department?.DeptCode</td>
+                        <td>@s.Program?.Degree</td>
+                        <td>@s.CurrentSemester</td>
+                        <td>@s.CGPA.ToString("F2")</td>
+                        <td>
+                            @if (s.IsActive)
+                            { <span class="badge bg-success">Active</span> }
+                            else
+                            { <span class="badge bg-secondary">Inactive</span> }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

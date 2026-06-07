@@ -84,6 +84,14 @@ namespace HiSUP.Data
 
             modelBuilder.Entity<LibraryIssue>()
                 .Property(l => l.Fine).HasPrecision(8, 2);
+
+            // Fix table name mismatches
+            modelBuilder.Entity<FeeStructure>().ToTable("FeeStructure");
+            modelBuilder.Entity<UniversityProgram>().ToTable("Programs");
+            modelBuilder.Entity<AttendanceRecord>().ToTable("AttendanceRecords");
+            modelBuilder.Entity<LibraryItem>().ToTable("LibraryItems");
+            modelBuilder.Entity<LibraryIssue>().ToTable("LibraryIssues");
+            modelBuilder.Entity<AuditLog>().ToTable("AuditLog");
         }
     }
 }

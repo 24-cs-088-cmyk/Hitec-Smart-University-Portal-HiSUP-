@@ -1,0 +1,33 @@
+@model List<HiSUP.Models.LibraryItem>
+@{ ViewData["Title"] = "Library"; }
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h4 class="fw-bold mb-0"><i class="bi bi-journal-bookmarks text-primary"></i> Library</h4>
+</div>
+<form method="get" class="mb-4">
+    <div class="input-group" style="max-width:500px">
+        <input type="text" name="search" class="form-control"
+               placeholder="Search books by title or author..."
+               value="@ViewBag.Search"/>
+        <button class="btn btn-primary" type="submit">
+            <i class="bi bi-search"></i> Search
+        </button>
+    </div>
+</form>
+<div class="row g-3">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4">
+            <div class="card p-3 h-100">
+                <div class="fw-bold">@item.Title</div>
+                <div class="text-muted small">@item.Author</div>
+                <div class="text-muted small">@item.Category • @item.PublishYear</div>
+                <div class="mt-2">
+                    @if (item.CopiesAvailable > 0)
+                    { <span class="badge bg-success">@item.CopiesAvailable copies available</span> }
+                    else
+                    { <span class="badge bg-danger">Not available</span> }
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,43 @@
+@{ ViewData["Title"] = "Transcript"; }
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h4 class="fw-bold mb-0"><i class="bi bi-file-earmark-text text-primary"></i> Academic Transcript</h4>
+</div>
+<div class="card p-4 mb-3">
+    <div class="row">
+        <div class="col-md-6">
+            <div><strong>Name:</strong> @ViewBag.Student?.FirstName @ViewBag.Student?.LastName</div>
+            <div><strong>Email:</strong> @ViewBag.Student?.Email</div>
+            <div><strong>Department:</strong> @ViewBag.Student?.Department?.DeptName</div>
+        </div>
+        <div class="col-md-6">
+            <div><strong>Program:</strong> @ViewBag.Student?.Program?.ProgramName</div>
+            <div><strong>Semester:</strong> @ViewBag.Student?.CurrentSemester</div>
+            <div><strong>CGPA:</strong> <span class="badge bg-primary fs-6">@ViewBag.Student?.CGPA.ToString("F2")</span></div>
+        </div>
+    </div>
+</div>
+<div class="card p-3">
+    <table class="table table-hover align-middle">
+        <thead class="table-light">
+            <tr><th>Course</th><th>Code</th><th>Credits</th><th>Semester</th><th>Marks</th><th>Grade</th><th>Points</th></tr>
+        </thead>
+        <tbody>
+            @foreach (var e in (List<HiSUP.Models.Enrollment>)ViewBag.Grades)
+            {
+                <tr>
+                    <td>@e.Section?.Course?.CourseName</td>
+                    <td>@e.Section?.Course?.CourseCode</td>
+                    <td>@e.Section?.Course?.CreditHours</td>
+                    <td>@e.Section?.SemesterLabel</td>
+                    <td>@(e.Grade?.MarksObtained.ToString("F1") ?? "—")</td>
+                    <td>
+                        @if (e.Grade != null)
+                        { <span class="badge bg-success">@e.Grade.LetterGrade</span> }
+                        else { <span class="text-muted">Pending</span> }
+                    </td>
+                    <td>@(e.Grade?.GradePoints?.ToString("F2") ?? "—")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

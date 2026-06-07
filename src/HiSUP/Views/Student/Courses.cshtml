@@ -1,0 +1,51 @@
+@model List<HiSUP.Models.Section>
+@{ ViewData["Title"] = "Available Courses"; }
+<h4 class="fw-bold mb-4"><i class="bi bi-book text-primary"></i> Available Courses</h4>
+<div class="card p-3">
+    <table class="table table-hover align-middle">
+        <thead class="table-light">
+            <tr><th>Course</th><th>Faculty</th><th>Semester</th><th>Credits</th><th>Seats</th><th>Action</th></tr>
+        </thead>
+        <tbody>
+            @foreach (var s in Model)
+            {
+                <tr>
+                    <td>
+                        <div class="fw-semibold">@s.Course?.CourseName</div>
+                        <small class="text-muted">@s.Course?.CourseCode</small>
+                    </td>
+                    <td>@s.Faculty?.FirstName @s.Faculty?.LastName</td>
+                    <td>@s.SemesterLabel</td>
+                    <td>@s.Course?.CreditHours</td>
+                    <td>
+                        <span class="badge @(s.SeatsAvailable > 5 ? "bg-success" : "bg-warning text-dark")">
+                            @s.SeatsAvailable left
+                        </span>
+                    </td>
+                    <td>
+                        <button class="btn btn-sm btn-primary"
+                                onclick="enroll(@s.SectionID)">
+                            <i class="bi bi-plus"></i> Enroll
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+<script>
+async function enroll(sectionId) {
+    const res  = await fetch('/Student/Enroll', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json',
+                   'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]')?.value ?? '' },
+        body: JSON.stringify(sectionId)
+    });
+    const data = await res.json();
+    alert(data.success ? 'Enrolled successfully!' : data.message);
+    if (data.success) location.reload();
+}
+</script>
+}

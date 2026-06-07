@@ -1,0 +1,35 @@
+@{ ViewData["Title"] = "Fee History"; }
+<h4 class="fw-bold mb-4"><i class="bi bi-cash text-primary"></i> Fee History</h4>
+<div class="card p-3">
+    @if (ViewBag.Payments != null && ((List<HiSUP.Models.FeePayment>)ViewBag.Payments).Count > 0)
+    {
+        <table class="table table-hover align-middle">
+            <thead class="table-light">
+                <tr><th>Date</th><th>Fee Type</th><th>Amount</th><th>Status</th><th>Reference</th></tr>
+            </thead>
+            <tbody>
+                @foreach (var p in (List<HiSUP.Models.FeePayment>)ViewBag.Payments)
+                {
+                    <tr>
+                        <td>@p.PaymentDate.ToString("dd/MM/yyyy")</td>
+                        <td>@p.FeeStructure?.FeeType</td>
+                        <td>Rs. @p.AmountPaid.ToString("N0")</td>
+                        <td>
+                            <span class="badge @(p.Status == "Paid" ? "bg-success" : p.Status == "Partial" ? "bg-warning text-dark" : "bg-danger")">
+                                @p.Status
+                            </span>
+                        </td>
+                        <td class="text-muted small">@p.ReferenceNo</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="text-center text-muted py-4">
+            <i class="bi bi-inbox fs-1"></i>
+            <p>No payment records found.</p>
+        </div>
+    }
+</div>

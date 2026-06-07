@@ -1,24 +1,21 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using HiSUP.Models;
 
-namespace HiSUP.Controllers;
-
-public class HomeController : Controller
+namespace HiSUP.Controllers
 {
-    public IActionResult Index()
+    public class HomeController : Controller
     {
-        return View();
-    }
+        public IActionResult Index()
+        {
+            if (!User.Identity!.IsAuthenticated)
+                return RedirectToAction("Login", "Account");
 
-    public IActionResult Privacy()
-    {
-        return View();
-    }
+            if (User.IsInRole("Admin"))   return RedirectToAction("Index", "Admin");
+            if (User.IsInRole("Faculty")) return RedirectToAction("Index", "Faculty");
+            if (User.IsInRole("Finance")) return RedirectToAction("Index", "Finance");
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return RedirectToAction("Index", "Student");
+        }
+
+        public IActionResult Privacy() => View();
     }
 }

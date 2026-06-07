@@ -1,0 +1,32 @@
+@model List<HiSUP.Models.AuditLog>
+@{ ViewData["Title"] = "Audit Log"; }
+<h4 class="fw-bold mb-4"><i class="bi bi-shield-check text-primary"></i> Audit Log</h4>
+<div class="card p-3">
+    <div class="table-responsive">
+        <table class="table table-hover align-middle small">
+            <thead class="table-light">
+                <tr><th>Time</th><th>Table</th><th>Operation</th><th>User</th><th>Old Value</th><th>New Value</th></tr>
+            </thead>
+            <tbody>
+                @foreach (var log in Model)
+                {
+                    <tr>
+                        <td>@log.LoggedAt.ToString("dd/MM/yy HH:mm")</td>
+                        <td><span class="badge bg-secondary">@log.TableName</span></td>
+                        <td>
+                            @if (log.Operation == "INSERT")
+                            { <span class="badge bg-success">INSERT</span> }
+                            else if (log.Operation == "UPDATE")
+                            { <span class="badge bg-warning text-dark">UPDATE</span> }
+                            else
+                            { <span class="badge bg-danger">DELETE</span> }
+                        </td>
+                        <td>@log.DBUser</td>
+                        <td class="text-muted" style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">@log.OldValue</td>
+                        <td class="text-muted" style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">@log.NewValue</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
