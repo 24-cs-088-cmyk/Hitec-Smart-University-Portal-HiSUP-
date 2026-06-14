@@ -46,16 +46,24 @@ using (var scope = app.Services.CreateScope())
     var db          = scope.ServiceProvider.GetRequiredService<HiSUPContext>();
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-    // Creates Identity tables if they don't exist
-    // Does NOT touch your existing HiSUP_DB tables
-    db.Database.EnsureCreated();
-
-    // Seed roles
-    string[] roles = { "Admin", "Student", "Faculty", "Finance" };
-    foreach (var role in roles)
+    try
     {
-        if (!await roleManager.RoleExistsAsync(role))
-            await roleManager.CreateAsync(new IdentityRole(role));
+        // Creates Identity tables if they don't exist
+        // Does NOT touch your existing HiSUP_DB tables
+        db.Database.EnsureCreated();
+
+        // Seed roles
+        string[] roles = { "Admin", "Student", "Faculty", "Finance" };
+        foreach (var role in roles)
+        {
+            if (!await roleManager.RoleExistsAsync(role))
+                await roleManager.CreateAsync(new IdentityRole(role));
+        }
+    }
+    catch (Exception ex)
+    {
+        // Ignore DB startup errors on Somee so the website doesn't crash with 500.30
+        Console.WriteLine("DB Init Error: " + ex.Message);
     }
 }
 

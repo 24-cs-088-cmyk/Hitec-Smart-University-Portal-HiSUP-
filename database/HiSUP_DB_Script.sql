@@ -4,14 +4,14 @@
 -- CS-318 Advanced Database Management Systems
 -- ============================================================
 
-USE master;
-GO
-DROP DATABASE IF EXISTS HiSUP_DB;
-GO
-CREATE DATABASE HiSUP_DB;
-GO
-USE HiSUP_DB;
-GO
+-- USE master;
+-- GO
+-- DROP DATABASE IF EXISTS HiSUP_DB;
+-- GO
+-- CREATE DATABASE HiSUP_DB;
+-- GO
+-- USE HiSUP_DB;
+-- GO
 
 -- ============================================================
 -- 1. UserAccounts
@@ -420,24 +420,24 @@ GO
 -- ============================================================
 -- FULL-TEXT SEARCH
 -- ============================================================
-IF NOT EXISTS (SELECT * FROM sys.fulltext_catalogs WHERE name = 'HiSUP_FT_Catalog')
-    CREATE FULLTEXT CATALOG HiSUP_FT_Catalog AS DEFAULT;
-GO
+-- IF NOT EXISTS (SELECT * FROM sys.fulltext_catalogs WHERE name = 'HiSUP_FT_Catalog')
+--     CREATE FULLTEXT CATALOG HiSUP_FT_Catalog AS DEFAULT;
+-- GO
 
 -- Get the PK index name dynamically and create full-text index
-DECLARE @pkName NVARCHAR(200);
-SELECT @pkName = i.name
-FROM sys.indexes i
-WHERE i.object_id = OBJECT_ID('LibraryItems')
-  AND i.is_primary_key = 1;
+-- DECLARE @pkName NVARCHAR(200);
+-- SELECT @pkName = i.name
+-- FROM sys.indexes i
+-- WHERE i.object_id = OBJECT_ID('LibraryItems')
+--   AND i.is_primary_key = 1;
 
-DECLARE @sql NVARCHAR(500);
-SET @sql = 'CREATE FULLTEXT INDEX ON LibraryItems(Title, Author)
-    KEY INDEX ' + QUOTENAME(@pkName) + '
-    ON HiSUP_FT_Catalog
-    WITH CHANGE_TRACKING AUTO;';
-EXEC sp_executesql @sql;
-GO
+-- DECLARE @sql NVARCHAR(500);
+-- SET @sql = 'CREATE FULLTEXT INDEX ON LibraryItems(Title, Author)
+--     KEY INDEX ' + QUOTENAME(@pkName) + '
+--     ON HiSUP_FT_Catalog
+--     WITH CHANGE_TRACKING AUTO;';
+-- EXEC sp_executesql @sql;
+-- GO
 
 -- ============================================================
 -- SEED DATA

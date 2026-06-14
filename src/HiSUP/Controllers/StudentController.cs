@@ -36,14 +36,8 @@ namespace HiSUP.Controllers
                 .Include(s => s.Program)
                 .FirstOrDefaultAsync(s => s.UserAccountID == user!.Id);
 
-            // If no student record linked yet, show first student as demo
-            if (student == null)
-            {
-                student = await _context.Students
-                    .Include(s => s.Department)
-                    .Include(s => s.Program)
-                    .FirstOrDefaultAsync();
-            }
+            // Pass the Identity user so we can display their name even if they have no student profile
+            ViewBag.User = user;
 
             if (student == null)
             {
@@ -86,8 +80,7 @@ namespace HiSUP.Controllers
             {
                 var user    = await _userManager.GetUserAsync(User);
                 var student = await _context.Students
-                    .FirstOrDefaultAsync(s => s.UserAccountID == user!.Id)
-                    ?? await _context.Students.FirstOrDefaultAsync();
+                    .FirstOrDefaultAsync(s => s.UserAccountID == user!.Id);
 
                 if (student == null)
                     return Json(new { success = false, message = "No student record found." });
@@ -108,8 +101,9 @@ namespace HiSUP.Controllers
         {
             var user    = await _userManager.GetUserAsync(User);
             var student = await _context.Students
-                .FirstOrDefaultAsync(s => s.UserAccountID == user!.Id)
-                ?? await _context.Students.FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(s => s.UserAccountID == user!.Id);
+
+            ViewBag.User = user;
 
             if (student == null)
             {
@@ -136,11 +130,9 @@ namespace HiSUP.Controllers
             var student = await _context.Students
                 .Include(s => s.Department)
                 .Include(s => s.Program)
-                .FirstOrDefaultAsync(s => s.UserAccountID == user!.Id)
-                ?? await _context.Students
-                    .Include(s => s.Department)
-                    .Include(s => s.Program)
-                    .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(s => s.UserAccountID == user!.Id);
+
+            ViewBag.User = user;
 
             if (student == null)
             {
