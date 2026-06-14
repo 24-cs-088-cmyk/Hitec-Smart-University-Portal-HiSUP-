@@ -16,9 +16,9 @@
 
 | Name | Roll No | Contribution |
 |------|---------|--------------|
-| Arfa Mughal| 24-CS-088| MySQL, Backend development and Deployment|
-| Muskan Zahra| 24-CS-173| CloudDB and Soucrce Control |
-| Javeria Khurshid | 24-CS-058 | Frontend, Auth and Hosting |
+| Arfa Mughal | 24-CS-088 | Database design and implementation, stored procedures/functions/triggers/views, backend business logic |
+| Muskan Zahra | 24-CS-173 | Database integration, debugging, deployment, source control, cloud and Identity support |
+| Javeria Khurshid | 24-CS-058 | Frontend UI and Razor view design, authentication workflow, student/faculty portal UX |
 
 ---
 
