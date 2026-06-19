@@ -7,8 +7,8 @@
 
 ## Live Site
 
-🔗 **https://hisup-[RollNo].azurewebsites.net**  
-*(Update this URL once deployed)*
+🔗 **http://hisup.somee.com/Account/Register**  
+
 
 ---
 
@@ -51,8 +51,7 @@
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/[username]/HITEC-ADMS-HiSUP-[RollNo].git
-   cd HITEC-ADMS-HiSUP-[RollNo]
+   git clone https://github.com/24-cs-088-cmyk/Hitec-Smart-University-Portal-HiSUP-.git
    ```
 
 2. **Restore the database**  
